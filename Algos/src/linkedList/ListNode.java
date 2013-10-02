@@ -3,10 +3,12 @@ package linkedList;
 public class ListNode {
 	private int _data;
 	private ListNode _next;
+	private ListNode _previous;
 	
 	public ListNode(int data) {
 		_data = data;
 		_next = null;
+		_previous = null;
 	}
 
 	public int getData() {
@@ -23,5 +25,13 @@ public class ListNode {
 	
 	public ListNode getNext() {
 		return _next;
+	}
+	
+	public void setPrevious(ListNode previous) {
+		_previous = previous;
+	}
+	
+	public ListNode getprevious() {
+		return _previous;
 	}
 }
