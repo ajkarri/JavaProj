@@ -75,7 +75,7 @@ public class DoubllyLinkedList implements ILinkedList{
 		if ((headNode == null)) {
 			System.out.println("List is empty");
 			return null;
-		} else if (pos > noOfNodes){
+		} else if (pos > this.length()){
 			System.out.println("Enter a valid position");
 			return null;
 		}
