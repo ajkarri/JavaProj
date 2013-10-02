@@ -29,7 +29,7 @@ public class DoubllyLinkedList implements ILinkedList{
 		if (pos == 1) { // insert at beginning
 			ListNode newNode = CreateNewNode(data);
 			newNode.setNext(headNode);
-			newNode.setPrevious(headNode.getprevious());
+			headNode.setPrevious(newNode);
 			headNode = newNode;
 		} else { // insert in middle or end
 			int currentPos = 1;
@@ -42,8 +42,11 @@ public class DoubllyLinkedList implements ILinkedList{
 			//System.out.println("CurrentNode Node " +previousNode.getData() + " ,Current Positon" +currentPos);
 			ListNode tempNode = previousNode.getNext();
 			previousNode.setNext(CreateNewNode(data));
+			previousNode.getNext().setPrevious(previousNode);
+			if (tempNode!=null)
+				tempNode.setPrevious(previousNode.getNext());
 			previousNode.getNext().setNext(tempNode);
-		
+					
 		}
 	
 		noOfNodes++;
@@ -60,7 +63,7 @@ public class DoubllyLinkedList implements ILinkedList{
 	public int length() {
 		int length = 0;
 		ListNode currentNode = headNode;
-		while (currentNode != null){
+		while ((currentNode != null)){
 			currentNode = currentNode.getNext();
 			length++;
 		}
@@ -93,7 +96,7 @@ public class DoubllyLinkedList implements ILinkedList{
 	public void PrintLinkedList() {
 		ListNode currentNode = headNode;
 		System.out.print(" Linked List:: ");
-		while (currentNode != null){
+		while ((currentNode != null)){
 			System.out.print(currentNode.getData() + " ");
 			currentNode = currentNode.getNext();
 		}
@@ -156,6 +159,7 @@ public class DoubllyLinkedList implements ILinkedList{
 		if (pos == 1) { // insert at beginning
 			ListNode currentNode = headNode;
 			headNode = headNode.getNext();
+			headNode.setPrevious(null);
 			currentNode = null;
 		} else { // insert in middle or end
 			int currentPos = 1;
@@ -168,6 +172,8 @@ public class DoubllyLinkedList implements ILinkedList{
 			//System.out.println("CurrentNode Node " +previousNode.getData() + " ,Current Positon" +currentPos);
 			ListNode tempNode = previousNode.getNext();
 			previousNode.setNext(previousNode.getNext().getNext());
+			if (previousNode.getNext()!=null)
+				previousNode.getNext().setPrevious(previousNode);
 			tempNode = null;
 		
 		}
